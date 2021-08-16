@@ -17,11 +17,9 @@ function createRequestHandler({
 
     let response = await handleRequest(request, loadContext);
 
-    console.log("RESPONSE", response.status);
-
-    context.res = {
+    return {
       status: response.status,
-      headers: Object.fromEntries(response.headers),
+      headers: response.headers.raw(),
       body: await response.text(),
     };
   };
@@ -39,7 +37,8 @@ function createRemixHeaders(requestHeaders) {
 }
 
 function createRemixRequest(req) {
-  let url = req.headers["x-ms-original-url"];
+  // let url = req.headers["x-ms-original-url"];
+  let url = "http://localhost:7071";
 
   let init = {
     method: req.method || "GET",

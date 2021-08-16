@@ -1,4 +1,11 @@
-import type { MetaFunction, LinksFunction, LoaderFunction } from "remix";
+import {
+  MetaFunction,
+  LinksFunction,
+  LoaderFunction,
+  Headers,
+  json,
+  createCookie,
+} from "remix";
 import { useRouteData } from "remix";
 
 import stylesUrl from "../styles/index.css";
@@ -6,7 +13,7 @@ import stylesUrl from "../styles/index.css";
 export let meta: MetaFunction = () => {
   return {
     title: "Remix Starter",
-    description: "Welcome to remix!"
+    description: "Welcome to remix!",
   };
 };
 
@@ -15,7 +22,12 @@ export let links: LinksFunction = () => {
 };
 
 export let loader: LoaderFunction = async () => {
-  return { message: "this is awesome 😎" };
+  let headers = new Headers();
+
+  headers.append("set-cookie", createCookie("one").serialize("1"));
+  headers.append("set-cookie", createCookie("two").serialize("2"));
+
+  return json({ message: "this is awesome 😎" }, { headers });
 };
 
 export default function Index() {
