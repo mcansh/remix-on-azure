@@ -1,11 +1,13 @@
 {
   "compilerOptions": {
+    "target": "es5",
     "module": "commonjs",
-    "target": "es6",
-    "outDir": "dist",
-    "rootDir": ".",
-    "sourceMap": true,
-    "strict": false
+    "lib": ["DOM", "DOM.Iterable", "ES2019"],
+    "rootDir": "./azure/function/server",
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true
   },
-  "include": ["api/**/*.ts"]
+  "include": ["azure/**/*.ts"],
+  "exclude": ["app"]
 }
