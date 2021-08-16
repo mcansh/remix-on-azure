@@ -7,7 +7,7 @@
     "strict": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "outDir": "azure/function/server/dist"
+    "outDir": "./function/server/dist"
   },
   "include": ["azure/**/*.ts"],
   "exclude": ["app"]

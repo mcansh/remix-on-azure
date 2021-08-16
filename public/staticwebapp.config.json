@@ -2,14 +2,14 @@
   "routes": [
     {
       "route": "/",
-      "rewrite": "/api/azure"
+      "rewrite": "/api/function"
     },
     {
       "route": "/index.html",
-      "rewrite": "/api/azure"
+      "rewrite": "/api/function"
     }
   ],
   "navigationFallback": {
-    "rewrite": "/api/azure"
+    "rewrite": "/api/function"
   }
 }
