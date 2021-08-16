@@ -9,6 +9,6 @@
     "forceConsistentCasingInFileNames": true,
     "outDir": "./function/server/dist"
   },
-  "include": ["function/**/*.ts"],
+  "include": ["azure/**/*.ts"],
   "exclude": ["app"]
 }
