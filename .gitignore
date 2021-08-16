@@ -96,5 +96,5 @@ local.settings.json
 node_modules
 
 /.cache
-/azure/function/server/build
+/azure/function/build
 /public/build
