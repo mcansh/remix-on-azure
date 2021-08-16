@@ -5,6 +5,7 @@
   "license": "",
   "scripts": {
     "build": "remix build",
+    "build:functions": "tsc -b --project tsconfig.server.json",
     "dev": "remix run",
     "start": "remix-serve build"
   },
