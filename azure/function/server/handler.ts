@@ -44,7 +44,7 @@ export function createRequestHandler({
 
     context.res = {
       status: response.status,
-      headers: createRemixHeaders(req.headers),
+      headers: Object.fromEntries(response.headers),
       body: await response.text(),
     };
   };
@@ -62,7 +62,7 @@ export function createRemixHeaders(requestHeaders: HttpRequestHeaders) {
 }
 
 export function createRemixRequest(req: HttpRequest) {
-  let url = req.headers["x-ms-original-url"]!;
+  let url = req.headers["x-ms-original-url"];
 
   let init: RequestInit = {
     // TODO: why is this optional?

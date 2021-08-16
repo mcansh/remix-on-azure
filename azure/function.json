@@ -1,7 +1,7 @@
 {
   "bindings": [
     {
-      "authLevel": "Anonymous",
+      "authLevel": "anonymous",
       "type": "httpTrigger",
       "direction": "in",
       "name": "req",
@@ -18,5 +18,5 @@
       "name": "res"
     }
   ],
-  "scriptFile": "./function/server/index.js"
+  "scriptFile": "./function/server/dist/index.js"
 }
