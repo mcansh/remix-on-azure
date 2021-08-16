@@ -62,7 +62,7 @@ export function createRemixHeaders(requestHeaders: HttpRequestHeaders) {
 }
 
 export function createRemixRequest(req: HttpRequest) {
-  let url = req.headers["x-ms-original-url"]!;
+  let url = req.headers["x-ms-original-url"];
 
   let init: RequestInit = {
     // TODO: why is this optional?
