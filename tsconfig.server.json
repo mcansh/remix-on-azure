@@ -7,5 +7,5 @@
     "sourceMap": true,
     "strict": false
   },
-  "include": ["api/**"]
+  "include": ["api/**/*.ts"]
 }
