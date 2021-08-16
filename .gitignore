@@ -1,5 +1,5 @@
 node_modules
 
 /.cache
-/server/build
+/functions/build
 /public/build
