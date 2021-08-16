@@ -37,8 +37,8 @@ function createRemixHeaders(requestHeaders) {
 }
 
 function createRemixRequest(req) {
-  // let url = req.headers["x-ms-original-url"];
-  let url = "http://localhost:7071";
+  let url = req.headers["x-ms-original-url"];
+  // let url = "http://localhost:7071";
 
   let init = {
     method: req.method || "GET",
