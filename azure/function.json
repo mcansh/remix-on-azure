@@ -7,9 +7,14 @@
       "name": "req",
       "methods": [
         "get",
+        "head",
         "post",
         "put",
-        "delete"
+        "delete",
+        "connect",
+        "options",
+        "trace",
+        "patch"
       ]
     },
     {

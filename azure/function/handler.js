@@ -13,7 +13,8 @@ function createRequestHandler({
 
   return async (context, req) => {
     let request = createRemixRequest(req);
-    let loadContext = getLoadContext ? getLoadContext(req) : undefined;
+    let loadContext =
+      typeof getLoadContext === "function" ? getLoadContext(req) : undefined;
 
     let response = await handleRequest(request, loadContext);
 
@@ -37,8 +38,14 @@ function createRemixHeaders(requestHeaders) {
 }
 
 function createRemixRequest(req) {
-  let url = req.headers["x-ms-original-url"];
-  // let url = "http://localhost:7071";
+  let url;
+  if (process.env.NODE_ENV === "production") {
+    url = new URL(req.headers["x-ms-original-url"]);
+  } else {
+    url = new URL(req.url);
+    url.host = req.headers["host"];
+    url.pathname = url.pathname.replace("/api/azure", "");
+  }
 
   let init = {
     method: req.method || "GET",
@@ -49,7 +56,7 @@ function createRemixRequest(req) {
     init.body = req.body;
   }
 
-  return new Request(url, init);
+  return new Request(url.toString(), init);
 }
 
 module.exports = { createRequestHandler };
