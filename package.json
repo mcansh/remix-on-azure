@@ -5,7 +5,7 @@
   "license": "",
   "scripts": {
     "build": "remix build",
-    "dev": "remix run",
+    "dev": "swa start ./public --run \"remix dev\" --api .",
     "start": "remix-serve build"
   },
   "dependencies": {
