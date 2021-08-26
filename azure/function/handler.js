@@ -38,14 +38,7 @@ function createRemixHeaders(requestHeaders) {
 }
 
 function createRemixRequest(req) {
-  let url;
-  if (process.env.NODE_ENV === "production") {
-    url = new URL(req.headers["x-ms-original-url"]);
-  } else {
-    url = new URL(req.url);
-    url.host = req.headers["host"];
-    url.pathname = url.pathname.replace("/api/azure", "");
-  }
+  let url = req.headers["x-ms-original-url"];
 
   let init = {
     method: req.method || "GET",
@@ -56,7 +49,7 @@ function createRemixRequest(req) {
     init.body = req.body;
   }
 
-  return new Request(url.toString(), init);
+  return new Request(url, init);
 }
 
 module.exports = { createRequestHandler };
