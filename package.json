@@ -6,24 +6,27 @@
   "scripts": {
     "build": "remix build",
     "dev": "cross-env NODE_ENV=development swa start ./public --run \"remix dev\" --api .",
-    "start": "remix-serve build"
+    "start": "remix-serve build",
+    "prepare": "remix setup"
   },
   "dependencies": {
-    "@remix-run/node": "0.17.5",
-    "@remix-run/react": "0.17.5",
-    "@remix-run/serve": "0.17.5",
+    "@remix-run/node": "0.18.2",
+    "@remix-run/react": "0.18.2",
+    "@remix-run/serve": "0.18.2",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-router-dom": "6.0.0-beta.1",
-    "remix": "0.17.5"
+    "react-router-dom": "6.0.0-beta.4",
+    "remix": "0.18.2"
   },
   "devDependencies": {
     "@azure/functions": "1.2.3",
-    "@remix-run/dev": "0.17.5",
-    "@types/react": "17.0.19",
+    "@azure/static-web-apps-cli": "0.7.2",
+    "@remix-run/dev": "0.18.2",
+    "@types/react": "17.0.24",
     "@types/react-dom": "17.0.9",
     "cross-env": "7.0.3",
-    "typescript": "4.3.5"
+    "patch-package": "6.4.7",
+    "typescript": "4.4.3"
   },
   "engines": {
     "node": ">=14"
