@@ -1,7 +1,13 @@
 const {
-  Headers,
-  Request,
   createRequestHandler: createRemixRequestHandler,
+} = require("@remix-run/server-runtime");
+
+const {
+  formatServerError,
+  Headers: NodeHeaders,
+  Request: NodeRequest,
+  Response: NodeResponse,
+  RequestInit: NodeRequestInit,
 } = require("@remix-run/node");
 
 function createRequestHandler({
@@ -9,9 +15,10 @@ function createRequestHandler({
   getLoadContext,
   mode = process.env.NODE_ENV,
 }) {
-  let handleRequest = createRemixRequestHandler(build, mode);
+  let platform = { formatServerError };
+  let handleRequest = createRemixRequestHandler(build, platform, mode);
 
-  return async (context, req) => {
+  return async (_context, req) => {
     let request = createRemixRequest(req);
     let loadContext =
       typeof getLoadContext === "function" ? getLoadContext(req) : undefined;
@@ -27,7 +34,7 @@ function createRequestHandler({
 }
 
 function createRemixHeaders(requestHeaders) {
-  let headers = new Headers();
+  let headers = new NodeHeaders();
 
   for (let [key, value] of Object.entries(requestHeaders)) {
     if (!value) continue;
@@ -38,7 +45,10 @@ function createRemixHeaders(requestHeaders) {
 }
 
 function createRemixRequest(req) {
-  let url = req.headers["x-ms-original-url"];
+  let path = req.headers["x-ms-original-url"];
+  let host = req.headers["host"];
+  let origin = `http://${host}`;
+  let url = new URL(path, origin);
 
   let init = {
     method: req.method || "GET",
@@ -49,7 +59,7 @@ function createRemixRequest(req) {
     init.body = req.body;
   }
 
-  return new Request(url, init);
+  return new NodeRequest(url.toString(), init);
 }
 
 module.exports = { createRequestHandler };
