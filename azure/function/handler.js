@@ -45,10 +45,7 @@ function createRemixHeaders(requestHeaders) {
 }
 
 function createRemixRequest(req) {
-  let path = req.headers["x-ms-original-url"];
-  let host = req.headers["host"];
-  let origin = `http://${host}`;
-  let url = new URL(path, origin);
+  let url = req.headers["x-ms-original-url"];
 
   let init = {
     method: req.method || "GET",
@@ -59,7 +56,7 @@ function createRemixRequest(req) {
     init.body = req.body;
   }
 
-  return new NodeRequest(url.toString(), init);
+  return new NodeRequest(url, init);
 }
 
 module.exports = { createRequestHandler };

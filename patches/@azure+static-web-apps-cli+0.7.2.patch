@@ -30,7 +30,7 @@ index 51a42cc..cc3649a 100644
          core_1.logger.silly(` - target: ${chalk_1.default.yellow(target)}`);
          serveStaticOrProxyReponse(req, res, proxyApp, target);
 diff --git a/node_modules/@azure/static-web-apps-cli/dist/msha/middlewares/response.middleware.js b/node_modules/@azure/static-web-apps-cli/dist/msha/middlewares/response.middleware.js
-index 5ccfe06..18c00bb 100644
+index 5ccfe06..c66d278 100644
 --- a/node_modules/@azure/static-web-apps-cli/dist/msha/middlewares/response.middleware.js
 +++ b/node_modules/@azure/static-web-apps-cli/dist/msha/middlewares/response.middleware.js
 @@ -18,25 +18,33 @@ function getResponse(req, res, matchedRoute, userConfig, isFunctionRequest) {
@@ -41,8 +41,8 @@ index 5ccfe06..18c00bb 100644
 +        routes_engine_1.applyRedirectResponse(req, res, matchedRoute);
 +        return false
      }
-+    // We should always set the x-ms-original-url.
-+    req.headers["x-ms-original-url"] = req.url;
++    // We should always set the x-ms-original-url to be the full request URL.
++    req.headers["x-ms-original-url"] = new URL(req.url, `http://${req.headers.host}`).href;
      if (rewrite) {
          req.url = rewrite;
      }
