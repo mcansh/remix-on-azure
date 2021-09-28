@@ -10,6 +10,7 @@
     "prepare": "remix setup && patch-package"
   },
   "dependencies": {
+    "@remix-run/dev": "0.18.2",
     "@remix-run/node": "0.18.2",
     "@remix-run/react": "0.18.2",
     "@remix-run/serve": "0.18.2",
@@ -21,7 +22,6 @@
   "devDependencies": {
     "@azure/functions": "1.2.3",
     "@azure/static-web-apps-cli": "0.7.2",
-    "@remix-run/dev": "0.18.2",
     "@types/react": "17.0.24",
     "@types/react-dom": "17.0.9",
     "cross-env": "7.0.3",
