@@ -7,7 +7,7 @@
     "build": "remix build",
     "dev": "cross-env NODE_ENV=development swa start ./public --run \"remix dev\" --api .",
     "start": "remix-serve build",
-    "prepare": "patch-package && remix setup"
+    "prepare": "remix setup && patch-package"
   },
   "dependencies": {
     "@remix-run/node": "0.18.2",
