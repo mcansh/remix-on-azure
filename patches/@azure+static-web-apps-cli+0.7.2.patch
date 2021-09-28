@@ -15,15 +15,41 @@ index 2cc7edb..3d7c701 100644
      // generate a fake correlation ID
      req.setHeader("x-ms-request-id", `SWA-CLI-${Math.random().toString(36).substring(2).toUpperCase()}`);
      core_1.logger.silly(` - x-ms-request-id: ${chalk_1.default.yellow(req.getHeader("x-ms-request-id"))}`);
+diff --git a/node_modules/@azure/static-web-apps-cli/dist/msha/middlewares/request.middleware.js b/node_modules/@azure/static-web-apps-cli/dist/msha/middlewares/request.middleware.js
+index 51a42cc..538cd05 100644
+--- a/node_modules/@azure/static-web-apps-cli/dist/msha/middlewares/request.middleware.js
++++ b/node_modules/@azure/static-web-apps-cli/dist/msha/middlewares/request.middleware.js
+@@ -252,7 +252,7 @@ async function requestMiddleware(req, res, proxyApp, userConfig) {
+         return await auth_handler_1.handleAuthRequest(req, res, matchingRouteRule, userConfig);
+     }
+     response_middleware_1.getResponse(req, res, matchingRouteRule, userConfig, isFunctionReq);
+-    if (!isFunctionReq) {
++    if (!isFunctionReq && res.statusCode >= 400 && res.statusCode < 500) {
+         core_1.logger.silly(` - url: ${chalk_1.default.yellow(req.url)}`);
+         core_1.logger.silly(` - target: ${chalk_1.default.yellow(target)}`);
+         serveStaticOrProxyReponse(req, res, proxyApp, target);
 diff --git a/node_modules/@azure/static-web-apps-cli/dist/msha/middlewares/response.middleware.js b/node_modules/@azure/static-web-apps-cli/dist/msha/middlewares/response.middleware.js
-index 5ccfe06..0875b3f 100644
+index 5ccfe06..8d76b49 100644
 --- a/node_modules/@azure/static-web-apps-cli/dist/msha/middlewares/response.middleware.js
 +++ b/node_modules/@azure/static-web-apps-cli/dist/msha/middlewares/response.middleware.js
-@@ -21,6 +21,7 @@ function getResponse(req, res, matchedRoute, userConfig, isFunctionRequest) {
+@@ -20,6 +20,8 @@ function getResponse(req, res, matchedRoute, userConfig, isFunctionRequest) {
+         core_1.logger.silly(` - redirect rule detected. Exit`);
          return routes_engine_1.applyRedirectResponse(req, res, matchedRoute);
      }
++    // We should always set the x-ms-original-url.
++    req.headers["x-ms-original-url"] = req.url;
      if (rewrite) {
-+        req.headers["x-ms-original-url"] = encodeURI(req.url);
          req.url = rewrite;
      }
-     if ([403, 401].includes(statusCodeToServe)) {
+@@ -32,7 +34,11 @@ function getResponse(req, res, matchedRoute, userConfig, isFunctionRequest) {
+     }
+     const storageResult = getStorageContent(req, res, rewrite, matchedRoute, userConfig === null || userConfig === void 0 ? void 0 : userConfig.responseOverrides, userConfig === null || userConfig === void 0 ? void 0 : userConfig.navigationFallback, userConfig === null || userConfig === void 0 ? void 0 : userConfig.mimeTypes, matchedRoute === null || matchedRoute === void 0 ? void 0 : matchedRoute.headers, userConfig === null || userConfig === void 0 ? void 0 : userConfig.globalHeaders);
+     if (storageResult.isFunctionFallbackRequest) {
++        req.url = userConfig?.navigationFallback.rewrite;
+         return function_handler_1.handleFunctionRequest(req, res);
++    } else if (storageResult.isSuccessfulSiteHit) {
++        // The file does exist, but its not a function, so serve it statically
++        res.statusCode = 404;
+     }
+     if (statusCodeToServe) {
+         res.statusCode = statusCodeToServe;
