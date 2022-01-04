@@ -1,6 +1,14 @@
-import type { LinksFunction, LoaderFunction } from "remix";
-import { Meta, Links, Scripts, useRouteData, LiveReload } from "remix";
-import { Outlet } from "react-router-dom";
+import {
+  Links,
+  LinksFunction,
+  LiveReload,
+  LoaderFunction,
+  Meta,
+  Outlet,
+  Scripts,
+  ScrollRestoration,
+  useLoaderData,
+} from "remix";
 
 import stylesUrl from "./styles/global.css";
 
@@ -23,16 +31,16 @@ function Document({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         {children}
-
+        <ScrollRestoration />
         <Scripts />
-        {process.env.NODE_ENV === "development" && <LiveReload />}
+        <LiveReload />
       </body>
     </html>
   );
 }
 
 export default function App() {
-  let data = useRouteData();
+  let data = useLoaderData();
   return (
     <Document>
       <Outlet />

@@ -7,25 +7,24 @@
     "build": "remix build",
     "dev": "cross-env NODE_ENV=development swa start ./public --run \"remix dev\" --api-location .",
     "start": "remix-serve build",
-    "prepare": "remix setup"
+    "prepare": "remix setup node"
   },
   "dependencies": {
-    "@remix-run/dev": "0.21.0",
-    "@remix-run/node": "0.21.0",
-    "@remix-run/react": "0.21.0",
-    "@remix-run/serve": "0.21.0",
+    "@remix-run/dev": "1.1.1",
+    "@remix-run/node": "1.1.1",
+    "@remix-run/react": "1.1.1",
+    "@remix-run/serve": "1.1.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-router-dom": "6.0.2",
-    "remix": "0.21.0"
+    "remix": "1.1.1"
   },
   "devDependencies": {
-    "@azure/functions": "2.0.0",
-    "@azure/static-web-apps-cli": "0.8.1",
-    "@types/react": "17.0.35",
+    "@azure/functions": "3.0.0",
+    "@azure/static-web-apps-cli": "0.8.2",
+    "@types/react": "17.0.38",
     "@types/react-dom": "17.0.11",
     "cross-env": "7.0.3",
-    "typescript": "4.4.4"
+    "typescript": "4.5.4"
   },
   "engines": {
     "node": ">=14"

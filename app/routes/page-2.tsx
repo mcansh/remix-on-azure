@@ -1,6 +1,4 @@
-import * as React from "react";
-import { RouteComponent, MetaFunction } from "remix";
-import { Link } from "react-router-dom";
+import { RouteComponent, MetaFunction, Link } from "remix";
 
 const meta: MetaFunction = () => ({
   title: "Page 2",
