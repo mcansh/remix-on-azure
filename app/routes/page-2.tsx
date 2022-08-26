@@ -1,17 +1,15 @@
-import { RouteComponent, MetaFunction, Link } from "remix";
+import { MetaFunction, RouteComponent } from "@remix-run/node";
+import { Link } from "@remix-run/react";
 
-const meta: MetaFunction = () => ({
+export const meta: MetaFunction = () => ({
   title: "Page 2",
 });
 
-const Page: RouteComponent = () => {
+export default function Page2() {
   return (
     <>
       <p>Welcome to Page 2👋</p>
       <Link to="/">Go back home.</Link>
     </>
   );
-};
-
-export default Page;
-export { meta };
+}

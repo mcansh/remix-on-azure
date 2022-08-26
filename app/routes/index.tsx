@@ -1,10 +1,5 @@
-import {
-  Link,
-  LinksFunction,
-  LoaderFunction,
-  MetaFunction,
-  useLoaderData,
-} from "remix";
+import { LinksFunction, MetaFunction } from "@remix-run/node";
+import { Link, useLoaderData } from "@remix-run/react";
 
 import stylesUrl from "../styles/index.css";
 
@@ -19,12 +14,12 @@ export let links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: stylesUrl }];
 };
 
-export let loader: LoaderFunction = async () => {
+export let loader = async () => {
   return { message: "this is awesome 😎" };
 };
 
 export default function Index() {
-  let data = useLoaderData();
+  let data = useLoaderData<typeof loader>();
 
   return (
     <div style={{ textAlign: "center", padding: 20 }}>

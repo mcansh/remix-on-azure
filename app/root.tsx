@@ -1,14 +1,13 @@
+import { LinksFunction } from "@remix-run/node";
 import {
   Links,
-  LinksFunction,
   LiveReload,
-  LoaderFunction,
   Meta,
   Outlet,
   Scripts,
   ScrollRestoration,
   useLoaderData,
-} from "remix";
+} from "@remix-run/react";
 
 import stylesUrl from "./styles/global.css";
 
@@ -16,11 +15,12 @@ export let links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: stylesUrl }];
 };
 
-export let loader: LoaderFunction = async () => {
+export let loader = async () => {
   return { date: new Date() };
 };
 
-function Document({ children }: { children: React.ReactNode }) {
+export default function App() {
+  let data = useLoaderData<typeof loader>();
   return (
     <html lang="en">
       <head>
@@ -30,36 +30,14 @@ function Document({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        {children}
+        <Outlet />
+        <footer>
+          <p>This page was rendered at {data.date}</p>
+        </footer>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
       </body>
     </html>
-  );
-}
-
-export default function App() {
-  let data = useLoaderData();
-  return (
-    <Document>
-      <Outlet />
-      <footer>
-        <p>This page was rendered at {data.date.toLocaleString()}</p>
-      </footer>
-    </Document>
-  );
-}
-
-export function ErrorBoundary({ error }: { error: Error }) {
-  return (
-    <Document>
-      <h1>App Error</h1>
-      <pre>{error.message}</pre>
-      <p>
-        Replace this UI with what you want users to see when your app throws
-        uncaught errors.
-      </p>
-    </Document>
   );
 }

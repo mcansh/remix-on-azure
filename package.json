@@ -3,11 +3,9 @@
   "scripts": {
     "build": "remix build",
     "dev": "cross-env NODE_ENV=development swa start ./public --run \"remix dev\" --api-location .",
-    "start": "remix-serve build",
-    "prepare": "remix setup node"
+    "start": "remix-serve build"
   },
   "dependencies": {
-    "@remix-run/dev": "1.7.0",
     "@remix-run/node": "1.7.0",
     "@remix-run/react": "1.7.0",
     "@remix-run/serve": "1.7.0",
@@ -17,6 +15,7 @@
   "devDependencies": {
     "@azure/functions": "3.2.0",
     "@azure/static-web-apps-cli": "1.0.2",
+    "@remix-run/dev": "1.7.0",
     "@types/react": "18.0.17",
     "@types/react-dom": "18.0.6",
     "cross-env": "7.0.3",
