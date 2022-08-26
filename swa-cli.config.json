@@ -1,0 +1,15 @@
+{
+  "$schema": "https://aka.ms/azure/static-web-apps-cli/schema",
+  "configurations": {
+    "remix-on-azure": {
+      "outputLocation": "/public",
+      "appBuildCommand": "npm run build",
+      "apiBuildCommand": "npm run build",
+      "run": "npm run dev",
+      "appDevserverUrl": "http://localhost:3000",
+      "port": 4280,
+      "apiPort": 3000,
+      "apiLocation": "/azure/function/build"
+    }
+  }
+}
