@@ -3,7 +3,6 @@ const {
 } = require("@remix-run/server-runtime");
 
 const {
-  formatServerError,
   Headers: NodeHeaders,
   Request: NodeRequest,
   Response: NodeResponse,
@@ -15,8 +14,7 @@ function createRequestHandler({
   getLoadContext,
   mode = process.env.NODE_ENV,
 }) {
-  let platform = { formatServerError };
-  let handleRequest = createRemixRequestHandler(build, platform, mode);
+  let handleRequest = createRemixRequestHandler(build, mode);
 
   return async (_context, req) => {
     let request = createRemixRequest(req);
